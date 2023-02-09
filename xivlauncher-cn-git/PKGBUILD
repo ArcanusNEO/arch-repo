@@ -1,5 +1,5 @@
 pkgname=xivlauncher-cn-git
-pkgver=1.0.2.1
+pkgver=1.0.2.2
 pkgrel=1
 pkgdesc="Custom launcher for FFXIV CN"
 arch=('x86_64')
