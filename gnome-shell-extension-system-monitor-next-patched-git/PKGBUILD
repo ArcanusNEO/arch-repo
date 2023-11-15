@@ -1,0 +1,52 @@
+# Maintainer: ArcanusNEO <admin@transcliff.top>
+# Contributor: Simn Hayessen <simon@lnqs.io>
+
+pkgname=gnome-shell-extension-system-monitor-next-patched-git
+pkgver=r1207.68f51c5
+pkgrel=1
+pkgdesc="Display system information in GNOME Shell status bar (next fork)"
+arch=('any')
+url="https://github.com/mgalgs/gnome-shell-system-monitor-applet"
+license=('GPL3')
+depends=('gnome-shell>=3.26' 'libgtop' 'networkmanager')
+makedepends=('git')
+provides=(
+  "system-monitor-applet"
+  "gnome-shell-system-monitor-applet"
+  "gnome-shell-system-monitor-applet-git"
+  "gnome-shell-extension-system-monitor"
+  "gnome-shell-extension-system-monitor-git"
+  "gnome-shell-extension-system-monitor-next-patched"
+  "gnome-shell-extension-system-monitor-next-patched-git"
+)
+conflicts=(
+  "system-monitor-applet"
+  "gnome-shell-system-monitor-applet"
+  "gnome-shell-system-monitor-applet-git"
+  "gnome-shell-extension-system-monitor"
+  "gnome-shell-extension-system-monitor-git"
+  "gnome-shell-extension-system-monitor-next-patched"
+  "gnome-shell-extension-system-monitor-next-patched-git"
+)
+source=(
+  'git+https://github.com/mgalgs/gnome-shell-system-monitor-applet'
+  'max-cpufreq.patch'
+)
+sha256sums=(
+  'SKIP'
+  '2c07a6f23b3ecf9040cb382ba713125580d58f213576098516647196331dde08'
+)
+
+_reponame=gnome-shell-system-monitor-applet
+
+package() {
+  cd "$srcdir/$_reponame"
+  patch -p0 -d"system-monitor@paradoxxx.zero.gmail.com" <"${srcdir}/max-cpufreq.patch"
+  install -d "$pkgdir/usr/share/gnome-shell/extensions"
+  cp -r "system-monitor@paradoxxx.zero.gmail.com" "$pkgdir/usr/share/gnome-shell/extensions/system-monitor-next@paradoxxx.zero.gmail.com"
+}
+
+pkgver() {
+  cd "$_reponame"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}

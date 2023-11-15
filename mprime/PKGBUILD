@@ -1,0 +1,46 @@
+# Maintainer: graysky <therealgraysky AT protonmail DOT com>
+# Contributer: xyne <xyne AT archlinux DOT ca>
+# Contributer: TryA -  https://bbs.archlinux.org/viewtopic.php?id=114996
+
+pkgname=mprime
+pkgver=30.8.15
+epoch=2
+_pkgver=308b15
+pkgrel=1
+pkgdesc="A GIMPS, distributed computing project client, dedicated to finding Mersenne primes."
+arch=(x86_64)
+url="http://www.mersenne.org"
+license=('custom')
+depends=(curl hwloc boost-libs)
+makedepends=(boost)
+conflicts=(mprime-bin)
+source=("https://www.mersenne.org/ftp_root/gimps/v30/30.8/p95v${_pkgver}.source.zip"
+        0001-makefile-fix-build-for-Arch-Linux.patch
+				0002-makefile-fix-build-for-Arch-Linux.patch)
+b2sums=('9ec5da2125b62630da84cad91b2293403fbdc9d86eb3b03a3b943256417f816cdfff1d8c5af9f6e7604c5cc628c65c13161437e19468985b7b037562fc1050da'
+        'e9c2b55c11b3f2472ad714274a48c7c1d6df379a0ad01dd5e0e4e97e21e9b7cb5fd206037ba7734b4f837b7d93a497082fa5bf4cd528772cd252869a3470216c'
+        '31799d1459890bf0b5fc7e269be8229b7e21e1e483cff8153c97ba7d7dec79f181eb290a7652e21fc7ae5d7d97ba6128047458c58b052f365d7df480770ab019')
+
+prepare () {
+	patch -Np1 -i 0001-makefile-fix-build-for-Arch-Linux.patch
+	patch -Np1 -i 0002-makefile-fix-build-for-Arch-Linux.patch
+}
+
+build() {
+	cd "$srcdir/gwnum"
+	make -f make64
+
+	cd "$srcdir/linux64"
+	make
+}
+
+package() {
+	install -Dm755 linux64/mprime "$pkgdir/usr/bin/mprime"
+
+	# license and documentation
+	install -Dm644 gwnum/readme.txt "$pkgdir/usr/share/doc/$pkgname/readme.txt"
+	install -Dm644 gwnum/tutorial.txt "$pkgdir/usr/share/doc/$pkgname/tutorial.txt"
+  cp -r prime95/hlp "$pkgdir/usr/share/doc/$pkgname"
+}
+
+# vim:set ts=2 sw=2 et:

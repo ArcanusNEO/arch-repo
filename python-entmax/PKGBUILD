@@ -1,0 +1,26 @@
+# Maintainer: ArcanusNEO <admin@transcliff.top>
+_repo=deep-spin/entmax
+_pkgname=${_repo##*/}
+_pypi_package=$_pkgname
+_source_type=pypi-releases
+_upstreamver='1.1'
+
+pkgname=python-$_pkgname
+pkgver=${_upstreamver##v}
+pkgrel=1
+pkgdesc="The entmax mapping and its loss, a family of sparse alternatives to softmax."
+arch=(any)
+url=https://github.com/$_repo
+groups=('modified')
+depends=(python-pytorch)
+makedepends=(python-installer)
+license=(MIT)
+_py=py3
+_whl=${_pkgname//-/_}-$pkgver-$_py-none-any.whl
+source=("https://files.pythonhosted.org/packages/$_py/${_pkgname:0:1}/$_pkgname/$_whl")
+sha256sums=('09c2df0d233e893c35bacfa2b815c5639794f5038a6648e3cacf3eb68386eb1f')
+
+package() {
+  cd "$srcdir" || return 1
+  python -m installer --destdir="$pkgdir" "$_whl"
+}

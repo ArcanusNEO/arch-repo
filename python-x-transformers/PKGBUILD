@@ -1,0 +1,26 @@
+# Maintainer: ArcanusNEO <admin@transcliff.top>
+_repo=lucidrains/x-transformers
+_pkgname=${_repo##*/}
+_pypi_package=$_pkgname
+_source_type=pypi-releases
+_upstreamver='0.15.0'
+
+pkgname=python-$_pkgname
+pkgver=${_upstreamver##v}
+pkgrel=1
+pkgdesc="A simple but complete full-attention transformer with a set of promising experimental features from various papers"
+arch=(any)
+url=https://github.com/$_repo
+groups=('modified')
+depends=(python-einops python-pytorch)
+makedepends=(python-installer)
+license=(MIT)
+_py=py3
+_whl=${_pkgname//-/_}-$pkgver-$_py-none-any.whl
+source=("https://files.pythonhosted.org/packages/$_py/${_pkgname:0:1}/$_pkgname/$_whl")
+sha256sums=('7feefcf32f46005c2b9141d7dc0b08a0a472e4a7f4ea1f95e9e8dd4e79227309')
+
+package() {
+  cd "$srcdir" || return 1
+  python -m installer --destdir="$pkgdir" "$_whl"
+}

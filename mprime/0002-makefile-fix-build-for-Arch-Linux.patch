@@ -1,0 +1,16 @@
+--- mprime/gwnum/make64      2022-05-06 15:13:38.000000000 +0800
++++ mprime/gwnum/make64      2023-06-12 23:38:29.203860627 +0800
+@@ -3,11 +3,11 @@
+ #      scl enable devtoolset-8 bash
+ 
+ CC = gcc
+-CFLAGS = -I.. -I../sqlite-amalgamation-3180000 -I/usr/local/include -std=gnu99 -DX86_64 -Wno-unused-result -O2
++CFLAGS = -I.. -I../sqlite-amalgamation-3180000 -I/usr/local/include -std=gnu99 -DX86_64 -Wno-unused-result -O3 -march=native -mtune=native
+ #CFLAGS = -g -I.. -I../sqlite-amalgamation-3180000 -I/usr/local/include -std=gnu99 -DX86_64 -DGDEBUG -Wno-unused-result -O2
+ 
+ CPP = g++
+-CPPFLAGS = -I.. -I../qd -std=c++11 -DX86_64 -O2
++CPPFLAGS = -I.. -I../qd -std=c++11 -DX86_64 -O3 -march=native -mtune=native
+ #CPPFLAGS = -g -I.. -I../qd -std=c++11 -DX86_64 -DGDEBUG -O2
+ 
+ AR = ar
