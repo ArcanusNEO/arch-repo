@@ -13,4 +13,8 @@ sha256sums=('SKIP')
 
 package() {
   tar -xaf "${srcdir}/data.tar.xz" -C "${pkgdir}"
+  install -Dm644 "${pkgdir}/usr/lib/finalshell/lib/app/img/finalshell.png" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/finalshell.png"
+  install -Dm644 "${pkgdir}/usr/lib/finalshell/lib/finalshell.desktop" "${pkgdir}/usr/share/applications/finalshell.desktop"
+  chmod 755 "${pkgdir}/usr/lib/finalshell/bin/FinalShell"
+  ln -sr "${pkgdir}/usr/lib/finalshell/bin/FinalShell" "${pkgdir}/usr/bin/finalshell"
 }
