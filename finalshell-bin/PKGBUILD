@@ -9,12 +9,15 @@ arch=('x86_64')
 license=('custom')
 provides=('finalshell' 'FinalShell')
 source=('http://www.hostbuf.com/downloads/finalshell_linux_x64.deb')
-sha256sums=('SKIP')
+b2sums=('cc86c3a425b3827b26698f400e40bc7cbf8e51facc9386fb3946ee44a4fec14fcc28bab51893206e83c22b262d37981f406d4032b10889d82ddfbe3f16e27519')
 
 package() {
   tar -xaf "${srcdir}/data.tar.xz" -C "${pkgdir}"
-  install -Dm644 "${pkgdir}/usr/lib/finalshell/lib/app/img/finalshell.png" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/finalshell.png"
-  install -Dm644 "${pkgdir}/usr/lib/finalshell/lib/finalshell.desktop" "${pkgdir}/usr/share/applications/finalshell.desktop"
+  install -dm755 "${pkgdir}/usr/share/icons/hicolor/scalable/apps"
+  ln -sr "${pkgdir}/usr/lib/finalshell/lib/app/img/finalshell.png" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/finalshell.png"
+  install -dm755 "${pkgdir}/usr/share/applications"
+  ln -sr "${pkgdir}/usr/lib/finalshell/lib/finalshell-FinalShell.desktop" "${pkgdir}/usr/share/applications/finalshell.desktop"
   chmod 755 "${pkgdir}/usr/lib/finalshell/bin/FinalShell"
+  install -dm755 "${pkgdir}/usr/bin"
   ln -sr "${pkgdir}/usr/lib/finalshell/bin/FinalShell" "${pkgdir}/usr/bin/finalshell"
 }
