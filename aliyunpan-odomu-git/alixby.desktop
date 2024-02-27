@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=alixby
+Name[zh_CN]=阿里云盘小白羊版
+Comment=基于阿里云盘网页版开发的PC客户端
+Icon=alixby
+Exec=alixby %u
+Categories=Network;
+Terminal=false
+StartupNotify=true
+StartupWMClass=alixby

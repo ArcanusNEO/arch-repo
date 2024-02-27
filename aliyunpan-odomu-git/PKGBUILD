@@ -1,13 +1,14 @@
-# Maintainer: ArcanusNEO <admin@transcliff.top>
+# Maintainer: ArcanusNEO <admin@transcliff.eu.org>
 # Contributor: zhullyb < zhullyb [at] outook dot com >
 # Contributor: sukanka < su975853527 [at] gmail dot com >
+
 pkgname=aliyunpan-odomu-git
 url="https://github.com/odomu/aliyunpan"
 pkgrel=1
 pkgver=r287.87976f2
-pkgdesc="阿里云盘小白羊版，odomu's fork"
+pkgdesc="阿里云盘小白羊v3，现由 odomu 维护"
 arch=("any")
-license=("MIT")
+license=("GPL3")
 _electron=electron
 depends=("$_electron" 'aria2')
 optdepends=('mpv: media preview support')
@@ -16,30 +17,28 @@ provides=("aliyunpan-odomu")
 conflicts=("aliyunpan-odomu")
 source=(
   "git+${url}.git"
-  'aliyunpan-odomu.desktop'
+  'alixby.desktop'
 )
-sha256sums=(
+b2sums=(
   'SKIP'
-  'cd6aa0876d23c7a3cdf55e66baf87fcb98da5be1caba69cd37abce234008bf20'
+  'SKIP'
 )
 
 pkgver() {
   cd $srcdir/aliyunpan
-  echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+  printf "r%s.%s" $(git rev-list --count HEAD) $(git rev-parse --short HEAD)
 }
 
 prepare() {
-  cat >aliyunpan-odomu.sh <<EOF
+  cat <<EOF >alixby.sh
 #!/bin/sh
 set -eu
 
 export ELECTRON_FORCE_IS_PACKAGED=true
 export ELECTRON_IS_DEV=0
 
-exec $_electron --no-sandbox /usr/lib/aliyunpan-odomu/app.asar "\$@"
-
+exec $_electron /usr/lib/alixby/app.asar "\$@"
 EOF
-
 }
 
 build() {
@@ -49,17 +48,17 @@ build() {
 }
 
 package() {
-  install -Dm644 ${srcdir}/aliyunpan/release/linux-unpacked/resources/app.asar -t ${pkgdir}/usr/lib/aliyunpan-odomu/
-  cp -a ${srcdir}/aliyunpan/release/linux-unpacked/resources/crx/ ${pkgdir}/usr/lib/aliyunpan-odomu/
+  install -Dm644 ${srcdir}/aliyunpan/release/linux-unpacked/resources/app.asar -t ${pkgdir}/usr/lib/alixby/
+  cp -a ${srcdir}/aliyunpan/release/linux-unpacked/resources/crx/ ${pkgdir}/usr/lib/alixby/
 
-  mkdir -p ${pkgdir}/usr/lib/aliyunpan-odomu/engine
-  install -Dm644 ${srcdir}/aliyunpan/release/linux-unpacked/resources/engine/aria2.conf -t ${pkgdir}/usr/lib/aliyunpan-odomu/engine/
-  ln -s /usr/bin/aria2c ${pkgdir}/usr/lib/aliyunpan-odomu/engine/
+  mkdir -p ${pkgdir}/usr/lib/alixby/engine
+  install -Dm644 ${srcdir}/aliyunpan/release/linux-unpacked/resources/engine/aria2.conf -t ${pkgdir}/usr/lib/alixby/engine/
+  ln -s /usr/bin/aria2c ${pkgdir}/usr/lib/alixby/engine/
 
-  cp -a ${srcdir}/aliyunpan/release/linux-unpacked/resources/images/ ${pkgdir}/usr/lib/aliyunpan-odomu/
+  cp -a ${srcdir}/aliyunpan/release/linux-unpacked/resources/images/ ${pkgdir}/usr/lib/alixby/
   mkdir -p ${pkgdir}/usr/share/icons
-  ln -s /usr/lib/aliyunpan-odomu/images/icon_256x256.png ${pkgdir}/usr/share/icons/aliyunpan-odomu.png
+  ln -s /usr/lib/alixby/images/icon_256x256.png ${pkgdir}/usr/share/icons/alixby.png
 
-  install -Dm644 ${srcdir}/aliyunpan-odomu.desktop -t ${pkgdir}/usr/share/applications/
-  install -Dm755 ${srcdir}/aliyunpan-odomu.sh ${pkgdir}/usr/bin/aliyunpan-odomu
+  install -Dm644 ${srcdir}/alixby.desktop -t ${pkgdir}/usr/share/applications/
+  install -Dm755 ${srcdir}/alixby.sh ${pkgdir}/usr/bin/alixby
 }
