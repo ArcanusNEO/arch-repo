@@ -5,7 +5,7 @@
 pkgname=aliyunpan-odomu-git
 url="https://github.com/odomu/aliyunpan"
 pkgrel=1
-pkgver=r287.87976f2
+pkgver=r368.aaf64ff
 pkgdesc="阿里云盘小白羊v3，现由 odomu 维护"
 arch=("any")
 license=("GPL3")
@@ -37,7 +37,7 @@ set -eu
 export ELECTRON_FORCE_IS_PACKAGED=true
 export ELECTRON_IS_DEV=0
 
-exec $_electron /usr/lib/alixby/app.asar "\$@"
+exec $_electron --no-sandbox /usr/lib/alixby/app.asar "\$@"
 EOF
 }
 
