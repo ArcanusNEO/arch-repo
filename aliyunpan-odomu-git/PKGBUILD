@@ -21,7 +21,7 @@ source=(
 )
 b2sums=(
   'SKIP'
-  'SKIP'
+  '4680694587128108d004ee46d494189704bc598b25c90cf1269912ce37e8680eb5f7e0089b83d0642feb9e699cafcf17cc9bc5b96f166255aeb7f00db8a55d22'
 )
 
 pkgver() {
