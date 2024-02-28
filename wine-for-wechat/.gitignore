@@ -1,0 +1,10 @@
+/*
+!/.gitignore
+
+!/PKGBUILD
+!/.SRCINFO
+
+!/30-win32-aliases.conf
+!/wine-binfmt.conf
+!/wine-wechat.patch
+!/wine.install
