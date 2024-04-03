@@ -1,0 +1,17 @@
+# Maintainer: ArcanusNEO <admin@transcliff.eu.org>
+
+pkgname=emby-theater-unlocked
+pkgver=3.0.15
+pkgrel=1
+pkgdesc='An unlocked Electron app for Emby'
+arch=(x86_64)
+url=https://emby.media
+license=(GPL2)
+source=(emby-theater.deb)
+b2sums=('6458c24c63df1f089a0cb68a37aed648f003b3ef3453edc4db4a0c9c875fdf9e625c0653dfb83d7ce191a32ed51034d923709b134b63cf6d3be7ed2db12214c3')
+provides=(emby-theater)
+conflicts=(emby-theater)
+
+package() {
+  bsdtar xpvf data.tar.xz -C "${pkgdir}" --no-same-owner
+}
