@@ -3,7 +3,7 @@ _repo=deep-spin/entmax
 _pkgname=${_repo##*/}
 _pypi_package=$_pkgname
 _source_type=pypi-releases
-_upstreamver='1.1'
+_upstreamver='1.3'
 
 pkgname=python-$_pkgname
 pkgver=${_upstreamver##v}
