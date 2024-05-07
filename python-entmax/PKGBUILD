@@ -18,7 +18,7 @@ license=(MIT)
 _py=py3
 _whl=${_pkgname//-/_}-$pkgver-$_py-none-any.whl
 source=("https://files.pythonhosted.org/packages/$_py/${_pkgname:0:1}/$_pkgname/$_whl")
-sha256sums=('09c2df0d233e893c35bacfa2b815c5639794f5038a6648e3cacf3eb68386eb1f')
+sha256sums=('41bb1edbd497a1b53b1f0fc80befd543499dc704b4e5436ddf6c5728a2d00546')
 
 package() {
   cd "$srcdir" || return 1
